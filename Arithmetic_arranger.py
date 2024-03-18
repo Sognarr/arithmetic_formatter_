@@ -12,7 +12,7 @@ def arithmetic_arranger(problems, show_answers=False):
     string = ""
 
     for problem in problems:
-      if(re.search("[^\s0-9.+-", problem)):
+      if(re.search("[^\s0-9.+-]", problem)):
         if(re.search("[/]", problem) or re.search("[*]", problem)):
           return "Error: Operator must be '+' or '-'."
         return "Error: Numbers must only contain digits."
