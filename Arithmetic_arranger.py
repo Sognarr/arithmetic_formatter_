@@ -5,11 +5,11 @@ def arithmetic_arranger(problems, show_answers=False):
     if len(problems)> 5:
       return "Error: Too many problems."
 
-    first = ""
-    second = ""
-    lines = ""
-    sumx = ""
-    string = ""
+    first =""
+    second =""
+    lines =""
+    sumx =""
+    string =""
 
     for problem in problems:
       if(re.search("[^\s0-9.+-]", problem)):
@@ -18,26 +18,22 @@ def arithmetic_arranger(problems, show_answers=False):
         return "Error: Numbers must only contain digits."
       
 
-      firstNumber = problem.split(" ")[0]
-      operator = problem.split(" ")[1]
-      secondNumber = problem.split(" ")[2]
-
-      if(len(firstNumber) >= 5 or len(secondNumber) >= 5):
+      firstNumber, operator, secondNumber = problem.split()
+      if(len(firstNumber) > 4 or len(secondNumber) > 4):
         return "Error: Numbers cannot be more than four digits."
 
-      sum = ""
-      if (operator == '+'):
-        sum = str(int(firstNumber) + int(secondNumber))
+      sum_result = ""
+      if operator == '+':
+        sum_result = str(int(firstNumber) + int(secondNumber))
       elif (operator == '-'):
-        sum = str(int(firstNumber) - int(secondNumber))
+        sum_result = str(int(firstNumber) - int(secondNumber))
 
-      length = max(len(firstNumber), len(secondNumber))
-      top = str(firstNumber).rjust(length  + 2)
-      bottom = operator + str(secondNumber).rjust(length +1)
-      line =""
-      res= str(sum).rjust(length +2)
-      for s in range(length + 2):
-        line += "-"
+      length = max(len(firstNumber), len(secondNumber)) +2
+      top = str(firstNumber).rjust(length)
+      bottom = operator + str(secondNumber).rjust(length - 1 )
+      line ="-" * length
+      res= str(sum_result).rjust(length)
+      
 
       first += top + '    '
       second += bottom + '    '
@@ -45,9 +41,9 @@ def arithmetic_arranger(problems, show_answers=False):
       sumx += res + '    '
 
     if show_answers:
-      string = first + "\n" + second + "\n" + lines + "\n" + sumx
+      arranged_problems = first + "\n" + second + "\n" + lines + "\n" + sumx
     else:
-      string = first + "\n" + second + "\n" + lines
-    return string
+      arranged_problems = first + "\n" + second + "\n" + lines
+    return arranged_problems
 
 print(f'\n{arithmetic_arranger(["32 + 698", "3801 - 2", "45 + 43", "123 + 49"])}')
